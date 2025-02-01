@@ -1,0 +1,82 @@
+.form-container {
+  font-family: ' --font-family-roboto';
+  width: 384px;
+  padding: 48px 0px;
+  margin-top: 30px;
+  background-color: var(--color-light);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+
+  &-title {
+    text-align: center;
+  }
+
+  &-label {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+  }
+
+  &-input {
+    width: var(--width-form);
+    height: var(--height-form);
+    padding-left: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-placeholder);
+    &::placeholder {
+      color: var(--color-placeholder);
+    }
+    &:focus {
+      border: 1px solid var(--color-accent);
+      outline: none;
+    }
+    &-error {
+      font-size: var(--font-size-14);
+      color: var(--color-red);
+    }
+    &-error-border {
+      border: 1px solid var(--color-red);
+    }
+    &-password {
+      position: relative;
+      &-show {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+    }
+  }
+
+  &-checkbox {
+    width: var(--width-form);
+    padding-top: 10px;
+    border-top: 1px solid var(--color-placeholder);
+    display: flex;
+    align-items: baseline;
+    column-gap: 5px;
+  }
+
+  &-button {
+    width: var(--width-form);
+    height: var(--height-form);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-accent);
+    color: var(--color-light);
+    background-color: var(--color-accent);
+  }
+
+  &-login {
+    font-size: var(--font-size-12);
+    color: var(--color-placeholder);
+    &-link {
+      color: var(--color-accent);
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.header {
+  box-shadow: var(--box-shadow);
+  &__inner {
+    background-color: var(--color-light);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__logo {
+    &-link {
+      color: var(--color-dark-85);
+    }
+  }
+  &__btn-group {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+  }
+  &__card {
+    padding: 0px 10px;
+    align-items: center;
+    column-gap: 20px;
+    &-name {
+      color: var(--color-dark-85);
+    }
+  }
+}

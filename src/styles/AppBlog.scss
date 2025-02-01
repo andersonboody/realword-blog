@@ -1,0 +1,103 @@
+.article {
+  width: var(--width-post);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 696px var(--width-card);
+  grid-template-areas: 'details card' 'details button';
+  justify-content: space-between;
+  box-shadow: var(--box-shadow);
+  background-color: var(--color-light);
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+.details {
+  grid-area: details;
+  &-header {
+    display: flex;
+    column-gap: 15px;
+    align-items: center;
+  }
+  &-title {
+    font-size: var(--font-size-20);
+    color: var(--color-accent);
+    max-width: var(--width-title);
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+  &-tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    &-item {
+      font-size: var(--font-size-12);
+      border: 1px solid var(--color-dark-50);
+      padding: 2px;
+      border-radius: 3px;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+  &-text {
+    max-height: 49px;
+    padding-top: 10px;
+    font-size: var(--font-size-12);
+    overflow: hidden;
+
+    &--grey {
+      color: var(--color-dark-50);
+    }
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+  &-like {
+    font-size: var(--font-size-12);
+    &-btn {
+      &::after {
+        content: '\2661';
+      }
+      &--active {
+        &::after {
+          content: '❤';
+          color: var(--color-like);
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+  &__group-button {
+    grid-area: button;
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 12px;
+  }
+}
+
+.card {
+  grid-area: card;
+  display: flex;
+  column-gap: 10px;
+  justify-content: flex-end;
+
+  &-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+  }
+  &-name {
+    font-size: var(--font-size-18);
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+  &-date {
+    font-size: var(--font-size-12);
+    color: var(--color-dark-50);
+  }
+}

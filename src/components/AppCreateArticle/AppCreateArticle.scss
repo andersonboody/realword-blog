@@ -1,0 +1,52 @@
+.article-new {
+  display: flex;
+  justify-content: center;
+}
+
+.form-article {
+  font-family: var(--font-family-roboto);
+  font-weight: 400;
+
+  &__title {
+    font-size: var(--font-size-20);
+  }
+
+  &__label {
+    font-size: var(--font-size-14);
+  }
+  &__input {
+    width: var(--width-form-new-article);
+
+    &-area {
+      padding-top: 5px;
+      width: var(--width-form-new-article);
+      height: var(--height-form-new-article-aria);
+    }
+  }
+  &__tags {
+    align-self: flex-start;
+
+    &-title {
+      align-self: flex-start;
+    }
+    &-block {
+      flex-direction: row;
+      align-items: center;
+      gap: 15px;
+
+      &:last-child {
+        .blog-button--add {
+          display: block;
+        }
+      }
+    }
+    &-input {
+      width: 300px;
+    }
+  }
+  &__button {
+    align-self: flex-start;
+    font-size: var(--font-size-16);
+    font-weight: 400;
+  }
+}

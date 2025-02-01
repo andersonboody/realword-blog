@@ -1,0 +1,12 @@
+body {
+  font-family: var(--font-family-inter);
+  font-weight: 400;
+  color: var(--color-dark-85);
+  display: flex;
+  justify-content: center;
+}
+.container {
+  width: 1440px;
+  background-color: var(--color-background);
+  height: 100%;
+}

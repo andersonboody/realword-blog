@@ -1,0 +1,92 @@
+.btn {
+  width: 90px;
+  height: 50px;
+  color: var(--color-dark-85);
+  font-size: 18px;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  transition: 0.3s all;
+
+  &--success {
+    color: var(--color-success);
+    border-color: var(--color-success);
+    pointer-events: none;
+  }
+  &:hover {
+    background-color: var(--color-success);
+    color: var(--color-light);
+    border-color: var(--color-success);
+    transition: 0.3s all;
+  }
+  &-create {
+    display: inline-block;
+    width: 110px;
+    height: 31px;
+    padding: 2px 7px;
+    font-size: var(--font-size-14);
+    border-color: var(--color-success);
+    color: var(--color-success);
+    &:hover {
+      color: var(--color-light);
+      background-color: var(--color-success);
+      transition: 0.3s all;
+    }
+  }
+  &-logout {
+    width: 110px;
+    color: var(--color-dark-75);
+    border-color: var(--color-dark-75);
+    &:hover {
+      color: var(--color-light);
+      background-color: var(--color-dark-75);
+      border-color: var(--color-dark-75);
+      transition: 0.3s all;
+    }
+  }
+}
+
+.blog-button {
+  font-size: var(--font-size-16);
+  font-weight: 400;
+  border: 1px solid transparent;
+  width: 120px;
+  height: 40px;
+  padding: 0;
+  transition: 0.3s all;
+
+  &--delete {
+    border-color: var(--color-red);
+    color: var(--color-red);
+    &:hover {
+      background-color: var(--color-red);
+      color: var(--color-light);
+      border-color: var(--color-red);
+    }
+  }
+  &--add {
+    display: none;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    &:hover {
+      background-color: var(--color-accent);
+      color: var(--color-light);
+      border-color: var(--color-accent);
+    }
+  }
+  &--edit {
+    border-color: var(--color-success);
+    color: var(--color-success);
+    &:hover {
+      background-color: var(--color-success);
+      color: var(--color-light);
+      border-color: var(--color-success);
+    }
+  }
+}
+.detail-button {
+  width: 78px;
+  height: 31px;
+  align-items: center;
+  justify-content: center;
+}
