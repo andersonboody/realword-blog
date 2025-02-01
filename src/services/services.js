@@ -1,18 +1,14 @@
 import axios from 'axios'
 
-const options = {
-  headers: {
-    'Content-Type': 'application/json',
-  },
-}
-const apiKey = document.cookie.slice(6)
+// const apiKey = document.cookie.slice(6)
+// let date = new Date(Date.now() + 86400e3).toUTCString()
+const apiKey = localStorage.getItem('Token')
 const optionApiKey = {
   headers: {
     Authorization: `Bearer ${apiKey}`,
     'Content-Type': 'application/json',
   },
 }
-let date = new Date(Date.now() + 86400e3).toUTCString()
 
 const getBlog = async (page = 0) => {
   const limit = 10
@@ -28,8 +24,17 @@ const authUser = async (data) => {
     email: data.email,
     password: data.password,
   }
-  const response = await axios.post('https://blog-platform.kata.academy/api/users/login', { user: userData }, options)
-  document.cookie = `Token=${response.data.user.token}; expires=${date}`
+  const response = await axios.post(
+    'https://blog-platform.kata.academy/api/users/login',
+    { user: userData },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+  // document.cookie = `Token=${response.data.user.token}; expires=${date}`
+  localStorage.setItem('Token', response.data.user.token)
   return response
 }
 
@@ -40,8 +45,17 @@ const postNewUsers = async (data) => {
     password: data.password,
   }
 
-  const response = await axios.post('https://blog-platform.kata.academy/api/users', { user: userData }, options)
-  document.cookie = `Token=${response.data.user.token}; expires=${date}`
+  const response = await axios.post(
+    'https://blog-platform.kata.academy/api/users',
+    { user: userData },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+  // document.cookie = `Token=${response.data.user.token}; expires=${date}`
+  localStorage.setItem('Token', response.data.user.token)
   return response
 }
 
