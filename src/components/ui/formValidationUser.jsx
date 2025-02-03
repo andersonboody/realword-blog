@@ -120,13 +120,37 @@ const InputRepeatPassword = ({ register, errors, watch, show, setShow }) => {
   )
 }
 
-const InputImage = ({ register }) => {
+const InputCheckboxConsent = ({ register, errors }) => {
   return (
-    <label className="form-label">
-      Avatar image (url)
-      <input type="text" placeholder="Avatar image" className="form-input" {...register('imageUser')} />
+    <label className="form-checkbox">
+      <input
+        type="checkbox"
+        defaultChecked
+        {...register('checkboxConsent', {
+          required: 'Required to fill in.',
+        })}
+      />
+      <span>I agree to the processing of my personal information</span>
+      {errors?.checkboxConsent && (
+        <span className="form-input-error">{errors?.checkboxConsent?.message || 'Error!'}</span>
+      )}
     </label>
   )
 }
 
-export { InputEmail, InputPassword, InputUserName, InputRepeatPassword, InputImage }
+const InputImage = ({ register, defaultValue = '' }) => {
+  return (
+    <label className="form-label">
+      Avatar image (url)
+      <input
+        type="text"
+        placeholder="Avatar image"
+        className="form-input"
+        defaultValue={defaultValue}
+        {...register('imageUser')}
+      />
+    </label>
+  )
+}
+
+export { InputEmail, InputPassword, InputUserName, InputRepeatPassword, InputCheckboxConsent, InputImage }

@@ -5,7 +5,13 @@ import { useDispatch } from 'react-redux'
 
 import '../../styles/AppForm.scss'
 import { registrationUser } from '../../store/slices/usersSlice'
-import { InputEmail, InputPassword, InputRepeatPassword, InputUserName } from '../ui/formValidationUser'
+import {
+  InputCheckboxConsent,
+  InputEmail,
+  InputPassword,
+  InputRepeatPassword,
+  InputUserName,
+} from '../ui/formValidationUser'
 
 const AppRegistration = () => {
   const [show, setShow] = useState(false)
@@ -35,11 +41,8 @@ const AppRegistration = () => {
           <InputEmail register={register} errors={errors} />
           <InputPassword register={register} errors={errors} show={show} setShow={setShow} />
           <InputRepeatPassword register={register} errors={errors} watch={watch} show={show} setShow={setShow} />
+          <InputCheckboxConsent register={register} errors={errors} />
 
-          <label className="form-checkbox">
-            <input type="checkbox" defaultChecked />
-            <span>I agree to the processing of my personal information</span>
-          </label>
           <button className="form-button">Create</button>
           <p className="form-login">
             Already have an account?{' '}

@@ -1,6 +1,7 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 import './AppCreateArticle.scss'
 import { creatingNewBlog } from '../../store/slices/createNewBlogSlice'
@@ -8,6 +9,7 @@ import { setBlogDetail } from '../../store/slices/BlogToSlugSlice'
 import { InputShortDescription, InputTags, InputText, InputTitle } from '../ui/formValidatorNewArticle'
 
 const AppCreateArticle = () => {
+  const { auth } = useSelector((state) => state.users)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -33,7 +35,11 @@ const AppCreateArticle = () => {
       console.error(err)
     }
   }
-
+  useEffect(() => {
+    if (!auth) {
+      navigate('/sign-in')
+    }
+  }, [auth, navigate])
   return (
     <article className="article article-new">
       <form className="form form-article" onSubmit={handleSubmit(submitHandle)}>

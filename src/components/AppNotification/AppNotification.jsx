@@ -54,12 +54,14 @@ const AppNotification = () => {
 
     if (errorUser) {
       showNotification('error', errorUser)
+      dispatch(onClearStateUser())
     }
 
     if (errorBlog) {
       showNotification('error', errorBlog)
+      dispatch(onClearState())
     }
-  }, [errorUser, resultBlog, resultUser, errorBlog, notificationArticle, notificationUser, showNotification])
+  }, [errorUser, resultBlog, resultUser, errorBlog, notificationArticle, notificationUser, showNotification, dispatch])
 
   return null
 }
