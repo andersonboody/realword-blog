@@ -120,11 +120,11 @@ const InputRepeatPassword = ({ register, errors, watch, show, setShow }) => {
   )
 }
 
-const InputImage = () => {
+const InputImage = ({ register }) => {
   return (
     <label className="form-label">
       Avatar image (url)
-      <input type="text" placeholder="Avatar image" className="form-input" />
+      <input type="text" placeholder="Avatar image" className="form-input" {...register('imageUser')} />
     </label>
   )
 }

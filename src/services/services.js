@@ -64,9 +64,8 @@ const getProfileUpdateUser = async (data) => {
     username: data.userName,
     email: data.email,
     password: data.password,
-    image: data.image,
+    image: data.imageUser,
   }
-
   const response = await axios.put('https://blog-platform.kata.academy/api/user', { user: userData }, optionApiKey)
   return response
 }

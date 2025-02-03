@@ -19,6 +19,7 @@ const AppProfile = () => {
   const submitHandle = (data) => {
     dispatch(updateDataUser(data))
   }
+
   return (
     <div className="form-container">
       <form className="form" onSubmit={handleSubmit(submitHandle)}>
@@ -26,7 +27,7 @@ const AppProfile = () => {
         <InputUserName register={register} errors={errors} defaultValue={userName} />
         <InputEmail register={register} errors={errors} defaultValue={email} />
         <InputPassword register={register} errors={errors} show={show} setShow={setShow} title="New Password" />
-        <InputImage />
+        <InputImage register={register} />
         <button className="form-button">Save</button>
       </form>
     </div>
