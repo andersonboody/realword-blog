@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-// const apiKey = document.cookie.slice(6)
-// let date = new Date(Date.now() + 86400e3).toUTCString()
-const apiKey = localStorage.getItem('Token')
-const optionApiKey = {
-  headers: {
-    Authorization: `Bearer ${apiKey}`,
-    'Content-Type': 'application/json',
-  },
+const getOptionApiKey = () => {
+  const apiKey = localStorage.getItem('Token')
+  return {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+  }
 }
 
 const getBlog = async (page = 0) => {
@@ -38,7 +38,6 @@ const authUser = async (data) => {
       },
     }
   )
-  // document.cookie = `Token=${response.data.user.token}; expires=${date}`
   localStorage.setItem('Token', response.data.user.token)
   return response
 }
@@ -59,7 +58,6 @@ const postNewUsers = async (data) => {
       },
     }
   )
-  // document.cookie = `Token=${response.data.user.token}; expires=${date}`
   localStorage.setItem('Token', response.data.user.token)
   return response
 }
@@ -74,7 +72,7 @@ const getProfileUpdateUser = async (data) => {
   if (userData.password.length === 0) {
     delete userData.password
   }
-  const response = await axios.put('https://blog-platform.kata.academy/api/user', { user: userData }, optionApiKey)
+  const response = await axios.put('https://blog-platform.kata.academy/api/user', { user: userData }, getOptionApiKey())
   return response
 }
 
@@ -88,7 +86,7 @@ const postNewArticle = async (data) => {
   const response = await axios.post(
     'https://blog-platform.kata.academy/api/articles',
     { article: articleData },
-    optionApiKey
+    getOptionApiKey()
   )
   return response
 }
@@ -103,13 +101,13 @@ const putNewArticle = async (data) => {
   const response = await axios.put(
     `https://blog-platform.kata.academy/api/articles/${data.slug}`,
     { article: articleData },
-    optionApiKey
+    getOptionApiKey()
   )
   return response
 }
 
 const deleteMyArticle = async (slug) => {
-  const response = await axios.delete(`https://blog-platform.kata.academy/api/articles/${slug}`, optionApiKey)
+  const response = await axios.delete(`https://blog-platform.kata.academy/api/articles/${slug}`, getOptionApiKey())
   return response
 }
 
@@ -117,13 +115,16 @@ const postFavoriteArticle = async (slug) => {
   const response = await axios.post(
     `https://blog-platform.kata.academy/api/articles/${slug}/favorite`,
     {},
-    optionApiKey
+    getOptionApiKey()
   )
   return response.data
 }
 
 const deleteFavoriteArticle = async (slug) => {
-  const response = await axios.delete(`https://blog-platform.kata.academy/api/articles/${slug}/favorite`, optionApiKey)
+  const response = await axios.delete(
+    `https://blog-platform.kata.academy/api/articles/${slug}/favorite`,
+    getOptionApiKey()
+  )
   return response.data
 }
 
