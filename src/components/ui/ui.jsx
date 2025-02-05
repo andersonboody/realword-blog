@@ -29,5 +29,8 @@ const Loading = () => {
     </div>
   )
 }
+const LoadingHeart = () => {
+  return <Spin size="small" />
+}
 
-export { ArticleTags, Error, Loading }
+export { ArticleTags, Error, Loading, LoadingHeart }

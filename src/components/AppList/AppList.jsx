@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 
 import '../../styles/AppBlog.scss'
-import { ArticleTags, Error, Loading } from '../ui/ui'
+import { ArticleTags, Error, Loading, LoadingHeart } from '../ui/ui'
 import AppPagination from '../AppPagination/AppPagination'
 import { visibleTitle } from '../../utils/utils'
 import {
@@ -13,11 +13,13 @@ import {
   fetchBlogsFavorite,
   fetchBlogsFavoriteDelete,
 } from '../../store/slices/createBlogSlice'
-import { setBlogDetail } from '../../store/slices/BlogToSlugSlice'
+import { getBlogToSlug } from '../../store/slices/BlogToSlugSlice'
 
 const AppList = () => {
+  const [loadingHeart, setLoadingHeart] = useState(false)
   const dispatch = useDispatch()
   const { blogs, loading, error, countPage, currentPage } = useSelector((state) => state.createBlogs)
+  const { auth } = useSelector((state) => state.users)
 
   useEffect(() => {
     dispatch(fetchBlogs())
@@ -28,12 +30,12 @@ const AppList = () => {
     dispatch(setCurrentPage(page))
   }
   const onClickBlogElement = (element) => {
-    dispatch(setBlogDetail(element))
+    dispatch(getBlogToSlug(element))
   }
-  const onClickFavorite = (slug) => {
-    dispatch(fetchBlogsFavorite(slug))
+  const onClickFavorite = async (slug) => {
+    await dispatch(fetchBlogsFavorite(slug))
   }
-  const onClickFavoriteDelete = (slug) => {
+  const onClickFavoriteDelete = async (slug) => {
     dispatch(fetchBlogsFavoriteDelete(slug))
   }
 
@@ -43,21 +45,27 @@ const AppList = () => {
         <div className="details">
           <div className="details-header">
             <Link to={`/articles/${elem.slug}`}>
-              <h5 className="details-title" onClick={() => onClickBlogElement(elem)}>
+              <h5 className="details-title" onClick={() => onClickBlogElement(elem.slug)}>
                 {visibleTitle(elem.title)}
               </h5>
             </Link>
+            {loadingHeart && <LoadingHeart />}
             {elem.favorited ? (
               <span className="details-like">
                 <button
                   className="details-like-btn details-like-btn--active"
                   onClick={() => onClickFavoriteDelete(elem.slug)}
+                  disabled={!auth}
                 ></button>
                 {elem.favoritesCount}
               </span>
             ) : (
               <span className="details-like">
-                <button className="details-like-btn" onClick={() => onClickFavorite(elem.slug)}></button>
+                <button
+                  className="details-like-btn"
+                  onClick={() => onClickFavorite(elem.slug)}
+                  disabled={!auth}
+                ></button>
                 {elem.favoritesCount}
               </span>
             )}

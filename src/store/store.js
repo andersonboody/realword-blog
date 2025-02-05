@@ -10,7 +10,7 @@ import createNewBlogSlice from './slices/createNewBlogSlice'
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['users', 'blogToSlug'],
+  whitelist: ['users'],
 }
 
 const rootReducer = combineReducers({

@@ -79,7 +79,6 @@ const InputTags = ({ register, errors, fields, remove, append }) => {
               placeholder="Tag"
               defaultValue={field[index]}
               {...register(`tags.${index}`, {
-                required: 'Fill it in or delete it.',
                 maxLength: 30,
               })}
             />

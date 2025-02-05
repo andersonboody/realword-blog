@@ -30,7 +30,7 @@ const AppCreateArticle = () => {
       const result = await dispatch(creatingNewBlog(data))
       const newArticle = result.payload
       dispatch(setBlogDetail(newArticle.article))
-      navigate(`/articles/${newArticle.article.slug}`)
+      navigate(`/articles/`)
     } catch (err) {
       console.error(err)
     }

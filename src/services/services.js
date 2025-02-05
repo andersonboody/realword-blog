@@ -12,17 +12,22 @@ const optionApiKey = {
 
 const getBlog = async (page = 0) => {
   const limit = 10
-  const offset = page * 10
+  const offset = (page - 1) * 10
   const rest = await axios.get(`https://blog-platform.kata.academy/api/articles`, {
     params: { limit: limit, offset: offset },
   })
   return rest.data
 }
 
+const getBlogSlug = async (slug) => {
+  const rest = await axios.get(`https://blog-platform.kata.academy/api/articles/${slug}`)
+  return rest.data
+}
+
 const authUser = async (data) => {
   const userData = {
     email: data.email,
-    password: data.password,
+    password: data.passwordNoValidation,
   }
   const response = await axios.post(
     'https://blog-platform.kata.academy/api/users/login',
@@ -65,6 +70,9 @@ const getProfileUpdateUser = async (data) => {
     email: data.email,
     password: data.password,
     image: data.imageUser,
+  }
+  if (userData.password.length === 0) {
+    delete userData.password
   }
   const response = await axios.put('https://blog-platform.kata.academy/api/user', { user: userData }, optionApiKey)
   return response
@@ -131,6 +139,7 @@ const fetchServices = async (fn, data) => {
 
 export {
   getBlog,
+  getBlogSlug,
   authUser,
   postNewUsers,
   getProfileUpdateUser,

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 
 import '../../styles/AppForm.scss'
-import { InputEmail, InputPassword } from '../ui/formValidationUser'
+import { InputEmail, InputPasswordNoValidation } from '../ui/formValidationUser'
 import { authorizationUser } from '../../store/slices/usersSlice'
 
 const AppAuthorization = () => {
@@ -27,7 +27,7 @@ const AppAuthorization = () => {
         <h3 className="form-title">Sign In</h3>
 
         <InputEmail register={register} errors={errors} />
-        <InputPassword register={register} errors={errors} show={show} setShow={setShow} />
+        <InputPasswordNoValidation register={register} show={show} setShow={setShow} />
 
         <button className="form-button">Login</button>
         <p className="form-login">

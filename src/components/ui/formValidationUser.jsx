@@ -42,7 +42,7 @@ const InputEmail = ({ register, errors, defaultValue = '' }) => {
   )
 }
 
-const InputPassword = ({ register, errors, show, setShow, title = 'Password' }) => {
+const InputPassword = ({ register, errors, show, setShow, title = 'Password', noRequired = true }) => {
   return (
     <label className="form-label">
       {title}
@@ -52,7 +52,7 @@ const InputPassword = ({ register, errors, show, setShow, title = 'Password' }) 
           placeholder={title}
           className={`form-input ${errors.password ? 'form-input-error-border' : ''}`}
           {...register('password', {
-            required: 'The field must be filled in.',
+            required: noRequired ? 'The field must be filled in.' : false,
             minLength: {
               value: 6,
               message: 'Your password needs to be at least 6 characters.',
@@ -84,6 +84,28 @@ const InputPassword = ({ register, errors, show, setShow, title = 'Password' }) 
         />
       </div>
       {errors?.password && <span className="form-input-error">{errors?.password?.message || 'Error!'}</span>}
+    </label>
+  )
+}
+
+const InputPasswordNoValidation = ({ register, show, setShow }) => {
+  return (
+    <label className="form-label">
+      Password
+      <div className="form-input-password">
+        <input
+          type={show ? 'text' : 'password'}
+          placeholder="Password"
+          className="form-input"
+          {...register('passwordNoValidation')}
+        />
+        <EyeOutlined
+          className="form-input-password-show"
+          onClick={() => {
+            setShow(!show)
+          }}
+        />
+      </div>
     </label>
   )
 }
@@ -153,4 +175,12 @@ const InputImage = ({ register, defaultValue = '' }) => {
   )
 }
 
-export { InputEmail, InputPassword, InputUserName, InputRepeatPassword, InputCheckboxConsent, InputImage }
+export {
+  InputEmail,
+  InputPassword,
+  InputUserName,
+  InputRepeatPassword,
+  InputCheckboxConsent,
+  InputImage,
+  InputPasswordNoValidation,
+}

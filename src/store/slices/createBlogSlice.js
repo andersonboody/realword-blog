@@ -17,6 +17,9 @@ export const createBlogSlice = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload
     },
+    resetError: (state) => {
+      state.error = null
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -32,11 +35,7 @@ export const createBlogSlice = createSlice({
         state.loading = false
         state.error = action.error
       })
-      .addCase(fetchBlogsFavorite.pending, (state) => {
-        state.loading = true
-      })
       .addCase(fetchBlogsFavorite.fulfilled, (state, action) => {
-        state.loading = false
         const updatedArticle = action.payload.article
         state.blogs = state.blogs.map((elem) => {
           if (elem.slug === updatedArticle.slug) return updatedArticle
@@ -44,14 +43,9 @@ export const createBlogSlice = createSlice({
         })
       })
       .addCase(fetchBlogsFavorite.rejected, (state, action) => {
-        state.loading = false
         state.error = action.error
       })
-      .addCase(fetchBlogsFavoriteDelete.pending, (state) => {
-        state.loading = true
-      })
       .addCase(fetchBlogsFavoriteDelete.fulfilled, (state, action) => {
-        state.loading = false
         const updatedArticle = action.payload.article
         state.blogs = state.blogs.map((elem) => {
           if (elem.slug === updatedArticle.slug) return updatedArticle
@@ -59,7 +53,6 @@ export const createBlogSlice = createSlice({
         })
       })
       .addCase(fetchBlogsFavoriteDelete.rejected, (state, action) => {
-        state.loading = false
         state.error = action.error
       })
   },
@@ -81,4 +74,4 @@ export const fetchBlogsFavoriteDelete = createAsyncThunk('fetchBlogsFavoriteDele
 })
 
 export default createBlogSlice.reducer
-export const { setCurrentPage } = createBlogSlice.actions
+export const { setCurrentPage, resetError } = createBlogSlice.actions

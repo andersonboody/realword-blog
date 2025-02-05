@@ -18,6 +18,7 @@ const AppProfile = () => {
     handleSubmit,
     formState: { errors },
   } = useForm()
+
   const submitHandle = (data) => {
     dispatch(updateDataUser(data))
   }
@@ -34,7 +35,14 @@ const AppProfile = () => {
         <h3 className="form-title">Edit Profile</h3>
         <InputUserName register={register} errors={errors} defaultValue={userName} />
         <InputEmail register={register} errors={errors} defaultValue={email} />
-        <InputPassword register={register} errors={errors} show={show} setShow={setShow} title="New Password" />
+        <InputPassword
+          register={register}
+          errors={errors}
+          show={show}
+          setShow={setShow}
+          title="New Password"
+          noRequired={false}
+        />
         <InputImage register={register} defaultValue={image} />
         <button className="form-button">Save</button>
       </form>

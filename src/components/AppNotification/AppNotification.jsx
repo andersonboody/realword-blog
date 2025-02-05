@@ -5,10 +5,14 @@ import { useNavigate } from 'react-router-dom'
 
 import { onClearState } from '../../store/slices/createNewBlogSlice'
 import { onClearStateUser } from '../../store/slices/usersSlice'
+import { resetBlogDetail } from '../../store/slices/BlogToSlugSlice'
+import { resetError } from '../../store/slices/createBlogSlice'
 
 const AppNotification = () => {
   const { errorUser, resultUser } = useSelector((state) => state.users)
   const { resultBlog, errorBlog } = useSelector((state) => state.createNewBlog)
+  const { errorBlogSlug } = useSelector((state) => state.blogToSlug)
+  const { error } = useSelector((state) => state.createBlogs)
   const dispatch = useDispatch()
   const navigate = useNavigate('/')
 
@@ -47,21 +51,42 @@ const AppNotification = () => {
     if (resultBlog) {
       notificationArticle()
     }
-
     if (resultUser) {
       notificationUser()
     }
-
+    if (errorBlogSlug) {
+      showNotification(
+        'error',
+        'Most likely, there is no article with this address. Check that the address is correct!'
+      )
+      dispatch(resetBlogDetail())
+      navigate('/')
+    }
     if (errorUser) {
       showNotification('error', errorUser)
       dispatch(onClearStateUser())
     }
-
     if (errorBlog) {
       showNotification('error', errorBlog)
       dispatch(onClearState())
     }
-  }, [errorUser, resultBlog, resultUser, errorBlog, notificationArticle, notificationUser, showNotification, dispatch])
+    if (error) {
+      showNotification('error', error)
+      dispatch(resetError())
+    }
+  }, [
+    errorUser,
+    resultBlog,
+    resultUser,
+    errorBlog,
+    notificationArticle,
+    notificationUser,
+    showNotification,
+    dispatch,
+    errorBlogSlug,
+    navigate,
+    error,
+  ])
 
   return null
 }
